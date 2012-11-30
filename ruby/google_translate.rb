@@ -38,7 +38,7 @@ else # translate
   text = raw_text.strip
   base_uri = "http://translate.google.com"
   agent.get("#{base_uri}?sl=#{s_lang}&tl=#{t_lang}&text=#{text}") do |page|
-    print "s: #{text}\nt: "
+    print "#{s_lang}: #{text}\n#{t_lang}: "
     page.search('#result_box span').each { |e| puts e.content }
   end
   end_time = Time.now
