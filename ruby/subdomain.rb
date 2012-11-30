@@ -5,7 +5,8 @@ require 'set'
 # 参考 http://www.lijiejie.com/post/vb6-domain-hunter.html
 # 获取域名的所有子域名
 # E.g. subdomain.rb youku.com
-
+# version 1: single process, single thread
+#
 domain_name = ARGV[0]
 unless domain_name
   puts 'usage: xx.rb domain_name'
@@ -26,9 +27,10 @@ agent.get("#{base_uri}/setprefs?sig=#{sig}&hl=zh-CN&lr=lang_zh-CN&suggon=2&num=1
 
 # 翻页查询，直到结束
 # 去除重复项
+start_time = Time.now
 subdomains = SortedSet.new
 search_uri = "#{base_uri}/search?num=100&hl=zh-CN&newwindow=1&source=hp&q=site:#{domain_name}"
-while search_uri do
+while search_uri
   agent.get(search_uri) do |page|
     page.search('cite').each do |e|
       # 提取子域名
@@ -41,6 +43,10 @@ while search_uri do
     end
   end
 end
+end_time = Time.now
 
 subdomains.each { |v| puts v }
-puts subdomains.size
+pid, size = `ps ax -o pid,rss | grep -E "^[[:space:]]*#{Process::pid}"`.chomp.split(/\s+/).map { |s| s.strip.to_i }
+puts %Q{Used time: #{end_time - start_time}s
+Pid: #{pid}; Used memory: #{size}
+number of results: #{subdomains.size}}
