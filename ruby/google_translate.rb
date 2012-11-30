@@ -30,6 +30,7 @@ elsif ARGV.size == 1 && ARGV[0] == '-lang' # list all lang
     end
   end
 else # translate
+  start_time = Time.now
   raw_text, t_lang, s_lang = ARGV
   t_lang ||= 'zh-CN'
   s_lang ||= 'auto'
@@ -40,5 +41,11 @@ else # translate
     print "s: #{text}\nt: "
     page.search('#result_box span').each { |e| puts e.content }
   end
+  end_time = Time.now
+
+  pid, size = `ps ax -o pid,rss | grep -E "^[[:space:]]*#{Process::pid}"`.chomp.split(/\s+/).map { |s| s.strip.to_i }
+  puts %Q{used time: #{end_time - start_time}s, used memory: #{size / 1024}kb}
 end
+
+
 

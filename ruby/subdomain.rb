@@ -46,7 +46,8 @@ end
 end_time = Time.now
 
 subdomains.each { |v| puts v }
+puts "total: #{subdomains.size}"
+
 pid, size = `ps ax -o pid,rss | grep -E "^[[:space:]]*#{Process::pid}"`.chomp.split(/\s+/).map { |s| s.strip.to_i }
-puts %Q{Used time: #{end_time - start_time}s
-Pid: #{pid}; Used memory: #{size}
-number of results: #{subdomains.size}}
+puts %Q{used time: #{end_time - start_time}s, used memory: #{size / 1024}kb}
+
