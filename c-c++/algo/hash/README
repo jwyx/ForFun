@@ -1,0 +1,8 @@
+// credit:
+// 1. hash of string
+// http://www.cnblogs.com/-clq/archive/2012/05/31/2528153.html
+// http://www.yqshare.com/elfhash.html
+// http://www.cnblogs.com/eric-blog/archive/2011/04/20/2022521.html
+
+// prime:3001,5003,10007,20011,50021,100003,150001,200003,500009,704447,901963,1009237,1199993,1500007,2000003,5000011
+
