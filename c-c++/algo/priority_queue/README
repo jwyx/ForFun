@@ -1,0 +1,7 @@
+1）INSERT(S,x): 把元素x插入队列S
+2）MAXIMUM(S): 返回S中最大元素
+3）EXTRACT-MAX(S): 去掉并返回Ｓ中最大元素
+4）INCRESE-KEY(S,x,key): 在x位置插入值key, key should change
+
+TODO:
+1. implement

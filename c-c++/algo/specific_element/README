@@ -1,0 +1,6 @@
+// 中位数
+// http://bbs.csdn.net/topics/190034882
+// 在一个文件中有 10G 个整数，乱序排列，要求找出中位数。内存限制为 2G。只写出思路即可。
+
+// 主元素
+// http://blog.csdn.net/fatshaw/article/details/6300786
