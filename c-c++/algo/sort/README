@@ -1,0 +1,10 @@
+// QuickSort
+// 1. http://bbs.chinaunix.net/forum.php?mod=viewthread&tid=1011316
+
+// About partition:
+// 1. random quicksort
+// 2. median of each five elements
+// 3. median of random three elements
+
+// Implement
+// 1. can change to chass inherience, each child implements different version of paritition algorithm
