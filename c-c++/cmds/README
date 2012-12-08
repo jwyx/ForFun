@@ -1,0 +1,6 @@
+1. file size
+ls -l file // get size
+od -c file // get content
+
+2. the number of blocks this file used
+ls -ls file
