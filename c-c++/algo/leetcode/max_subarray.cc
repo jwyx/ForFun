@@ -9,5 +9,5 @@ int maxSubArray(int A[], int n) {
   return result;
 }
 
-// divide and conquer
+//TODO: divide and conquer
 
