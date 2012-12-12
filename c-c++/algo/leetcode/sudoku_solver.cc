@@ -1,9 +1,15 @@
-bool isValidSudoku(vector<vector<char> > &board) {
+// credit: http://blog.csdn.net/maqingli87/article/details/8010358
+bool solveSudoku(vector<vector<char> > &board) {
   for (int i = 0; i < board.size(); i ++) {
     for (int j = 0; j < board[i].size(); j ++) {
       if ('.' == board[i][j]) {
-        if (!isValid(board, i, j))
-          return false;
+        for (int k = 1; k <= 9; k ++) {
+          board[i][j] = '0' + k;
+          if (isValid(board, i, j) && solveSudoku(board))
+            return true;
+          board[i][j] = '.';
+        }
+        return false;
       }
     }
   }
