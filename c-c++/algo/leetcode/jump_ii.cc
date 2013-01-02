@@ -33,27 +33,28 @@ int jump(int A[], int n) {
 // greedy!!! TODO: prove
 // credit: http://blog.csdn.net/zhiyu27/article/details/8192833
 int jump1(int A[], int n) {
-  int curr = 0,count = 0;
-  while (1){
-    if(curr == n-1)
+  int curr = 0, count = 0;
+  while (1) {
+    // reach!
+    if (curr == n - 1)
       return count;
-    if(A[curr] + curr >= n-1)
-      return ++count;
-    int maxi = curr + 1, maxsum = 0;
-    // select the next index which can jump furthest
-    for(int i = curr + 1; i <= curr + A[curr]; ++i) {
-      if(maxsum < A[i] + i){
-        maxsum = A[i] + i;
-        maxi = i;
+    if (A[curr] + curr >= n - 1)
+      return ++ count;
+
+    // find the next max
+    int i_max = 0, sum_max = 0;
+    for (int i = curr + 1; i <= curr + A[curr]; ++ i) {
+      if (sum_max < A[i] + i) {
+        sum_max = A[i] + i;
+        i_max = i;
       }
     }
-    if(maxsum > A[curr] + curr) {
-      curr = maxi;
+    if (sum_max > A[curr] + curr) {
+      curr = i_max;
       ++ count;
     }
-    else {
+    else
       return 0;
-    }
   }
-  return 0;
+  return count;
 }

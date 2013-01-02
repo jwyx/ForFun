@@ -16,6 +16,7 @@ string countAndSay(int n) {
           count += 1;
           i ++;
         }
+        // if count > 9 , then have problem
         tmp.push_back(count + '0');
         tmp.push_back(res[i]);
       }

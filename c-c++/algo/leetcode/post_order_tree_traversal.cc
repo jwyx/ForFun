@@ -1,8 +1,9 @@
 void post_order_travesal(TreeNode *root) {
   stack<TreeNode *> s;
   TreeNode *curr = NULL, *prev = NULL;
-  int h = 0, lh = 0, rh = 0;
-  s.push(root);
+
+  if (root)
+    s.push(root);
 
   while (!s.empty()) {
     curr = s.top();
@@ -24,5 +25,9 @@ void post_order_travesal(TreeNode *root) {
     prev = curr;
   }
 }
+
+// how to process is_balance() using this algorithm
+// store structure { leftHeight, rightHeight, treeNodePtr } in stack
+// record the height of popped node as prevHeight
 
 // http://www.leetcode.com/2010/10/binary-tree-post-order-traversal.html

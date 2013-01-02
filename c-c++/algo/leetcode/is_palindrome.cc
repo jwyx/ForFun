@@ -1,5 +1,5 @@
-#include <iostream>
-using namespace std;
+//#include <iostream>
+//using namespace std;
 
 bool isPalindrome(int x) {
   if (x < 0)
@@ -20,8 +20,8 @@ bool isPalindrome(int x) {
   return true;
 }
 
-int main(void) {
-  int x = 0;
-  cin >> x;
-  cout << isPalindrome(x) << endl;
-}
+//int main(void) {
+//  int x = 0;
+//  cin >> x;
+//  cout << isPalindrome(x) << endl;
+//}

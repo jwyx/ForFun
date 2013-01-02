@@ -18,7 +18,9 @@ int minDistance(string word1, string word2) {
         table[i][j] = table[i + 1][j + 1];
       else {
         // NOTE: 此处需要考虑替换
+        // delete and insert have same effect
         table[i][j] = 1 + min(table[i + 1][j], table[i][j + 1]);
+        // replace
         table[i][j] = min(table[i][j], 1 + table[i + 1][j + 1]);
       }
     }

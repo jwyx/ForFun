@@ -88,3 +88,21 @@ bool canJump(int A[], int n) {
   }
   return false;
 }
+
+// credit: http://leetcode.com/questions/232/jump-game
+bool canJump(int A[], int n) {
+  if (n == 1)
+    return true;
+
+  int curr_max = 0, target = n - 1;
+  for (int i = 0; i < n - 1; ++ i) {
+    if (A[i] == 0 && curr_max < i + 1)
+      return false;
+    if (A[i] + i > curr_max && A[i] > 0) {
+      curr_max = A[i] + i;
+      if (curr_max >= target)
+        return true;
+    }
+  }
+  return false;
+}

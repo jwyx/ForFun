@@ -1,3 +1,4 @@
+// search in Young matrix!!
 bool searchMatrix(vector<vector<int> > &matrix, int target) {
   int m = matrix.size();    // rows
   int n = matrix[0].size(); // cols
@@ -35,3 +36,8 @@ bool searchMatrix(vector<vector<int> > &matrix, int target) {
   }
   return false;
 }
+
+// TODO: add more methods
+// Credit:
+//  blog.csdn.net/zhanglei8893/article/details/6234564
+//  blog.chinaunix.net/space.php?uid=24728651&do=blog&id=2592261

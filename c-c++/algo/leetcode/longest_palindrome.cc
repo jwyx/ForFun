@@ -1,3 +1,0 @@
-string longestPalindrome(string s) {
-
-}

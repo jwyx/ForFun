@@ -1,7 +1,7 @@
-#include <iostream>
-#include <string>
-#include <vector>
-using namespace std;
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//using namespace std;
 
 // credit: http://blog.csdn.net/zhiyu27/article/details/8192857
 vector<string> letterCombinations(string digits) {
@@ -27,11 +27,11 @@ vector<string> letterCombinations(string digits) {
   return result;
 }
 
-int main(void) {
-  string tmp;
-  cin >> tmp;
-  vector<string> v = letterCombinations(tmp);
-  for (int i = 0; i < v.size(); i ++) {
-    cout << v[i] << endl;
-  }
-}
+//int main(void) {
+//  string tmp;
+//  cin >> tmp;
+//  vector<string> v = letterCombinations(tmp);
+//  for (int i = 0; i < v.size(); i ++) {
+//    cout << v[i] << endl;
+//  }
+//}

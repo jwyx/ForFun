@@ -45,3 +45,17 @@ class Solution {
       return result;
     }
 };
+
+// the start of newInterval can before, within, after a existedInterval
+// the end of newInterval can before, within, after a existedInterval
+
+// if (start, after), add existed interval; continue
+
+// if (end, before), if not add newInterval, add new interval, then add existed interval; continue
+
+// if (start, within), modify the start of new interval
+// if (end, within), modify the end of new interval, if not add newInterval, add new interval
+
+// others, not add existed interval
+
+// finally, if not add newInterval, add new interval

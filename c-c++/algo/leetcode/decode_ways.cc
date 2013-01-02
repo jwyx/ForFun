@@ -48,6 +48,8 @@ int valid_code(string &s, int start, int end) {
 // fabonacci modified version!!!
 // credit: http://blog.csdn.net/zhiyu27/article/details/8190380
 
+// n = 0, 1, 2, 3, ...
+// f = 1, 1, 2, 3, ...
 int numDecodings(string s) {
   int a = 1, b = 1;
   // zero or one element
@@ -56,19 +58,23 @@ int numDecodings(string s) {
   // two elements
   for (int i = 1; i < s.size(); i ++) {
     int tmp = a;
-    // new f(n-1)
+    // f(n-1) 判断
     if ('0' == s[i])
       a = 0;
     // f(n-2) 判断
     int d2 = (s[i-1]-'0')*10 + (s[i]-'0');
-    // new f(n) = f(n-1) + f(n-2)
+    // f(n) = f(n-1) + f(n-2)
+    // namely, new f(n-1)
     if (d2 >= 10 && d2 <= 26)
       a += b;
     // new f(n-2)
     b = tmp;
-    // not possible
+    // not possible, because both f(n-1) and f(n-2) == 0
     if (!a && !b)
       break;
   }
   return a;
 }
+
+// | /// | /// | i |
+// | /// | i-1 | i |
