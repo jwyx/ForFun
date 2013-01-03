@@ -3,8 +3,8 @@
 void setZeroes(vector<vector<int> > &matrix) {
   if (matrix.empty() || matrix[0].empty())
     return;
-  // next 记录之前的所有额外的0数
-  // count 减去当前遇到的0数
+  // next 从前几行继承下来的额外的0
+  // count < 0, 该行原本有0
   int count = 0, next = 0;
   for (int i = 0; i < matrix.size() - 1; ++ i) {
     for (int j = 0; j < matrix[i].size(); ++ j) {
@@ -24,6 +24,7 @@ void setZeroes(vector<vector<int> > &matrix) {
   }
   // 处理所有列
   for (int j = 0; j < matrix.back().size(); ++ j) {
+    //此时next正常更新
     if (matrix.back()[j] == 0) {
       -- count;
       for (int k = 0; k < matrix.size() - 1; ++ k)

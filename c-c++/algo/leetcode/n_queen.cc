@@ -25,6 +25,7 @@ void dfs(int curr, vector<int> &board, vector<vector<string> > &result) {
       if (isOK(board, curr, i)) {
         board[curr] = i;
         dfs(curr+1, board, result);
+        // because board[curr] will be assigned again if it's necessary
         // board[curr] = -1;
       }
     }

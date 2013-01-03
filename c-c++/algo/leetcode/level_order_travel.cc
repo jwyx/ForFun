@@ -9,59 +9,56 @@
  */
 // I
 vector<vector<int> > levelOrder(TreeNode *root) {
-  vector<vector<int> > res;
+  vector<vector<int> > result;
   deque<TreeNode *> level;
-  vector<int> tmp;
+  vector<int> temp;
   int size = 0;
 
   if (root)
     level.push_back(root);
 
   while (!level.empty()) {
-    tmp.clear();
     size = level.size();
-    // process each level
+    temp.clear();
     for (int i = 0; i < size; i ++) {
       TreeNode *curr = level.front();
       if (curr->left)
         level.push_back(curr->left);
       if (curr->right)
         level.push_back(curr->right);
-      tmp.push_back(curr->val);
+      temp.push_back(curr->val);
       level.pop_front();
     }
-    res.push_back(tmp);
+    result.push_back(temp);
   }
-
-  return res;
+  return result;
 }
+
 
 // II
-vector<vector<int> > levelOrder1(TreeNode *root) {
-  vector<vector<int> > res;
+vector<vector<int> > levelOrderBottom(TreeNode *root) {
+  vector<vector<int> > result;
   deque<TreeNode *> level;
-  vector<int> tmp;
+  vector<int> temp;
   int size = 0;
 
   if (root)
     level.push_back(root);
 
   while (!level.empty()) {
-    tmp.clear();
+    temp.clear();
     size = level.size();
-    // process each level
     for (int i = 0; i < size; i ++) {
       TreeNode *curr = level.front();
       if (curr->left)
         level.push_back(curr->left);
       if (curr->right)
         level.push_back(curr->right);
-      tmp.push_back(curr->val);
+      temp.push_back(curr->val);
       level.pop_front();
     }
-    res.insert(res.begin(), 1, tmp);
+    result.insert(result.begin(), 1, temp);
   }
 
-  return res;
+  return result;
 }
-

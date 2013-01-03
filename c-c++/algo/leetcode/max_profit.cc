@@ -24,10 +24,11 @@ int maxProfit1(vector<int> &prices) {
 
   int curr = prices[0], total = 0;
   for (int i = 1; i < prices.size(); ++ i) {
-    // 差值最大的序列只发生在连续增长序列
+    // 确定当前的最小值，记录之后的差值
     if (prices[i] > curr)
       total = max(prices[i] - curr, total);
     else
+      // 最小值记录
       curr = prices[i];
   }
   return total;

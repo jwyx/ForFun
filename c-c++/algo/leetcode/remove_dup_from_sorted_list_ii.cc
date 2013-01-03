@@ -7,8 +7,8 @@
  * };
  */
 ListNode *deleteDuplicates(ListNode *head) {
-  if (!head)
-    return NULL;
+  //if (!head)
+  //  return NULL;
   bool dup = false;
   ListNode** curr = &head;
   while (*curr) {

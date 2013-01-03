@@ -15,6 +15,7 @@ void dfs(int curr, vector<int> &board, int &total) {
       if (isOK(board, curr, i)) {
         board[curr] = i;
         dfs(curr+1, board, total);
+        // because board[curr] will be assigned again if it's necessary
         // board[curr] = -1;
       }
     }

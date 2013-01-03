@@ -35,3 +35,27 @@ vector<string> letterCombinations(string digits) {
 //    cout << v[i] << endl;
 //  }
 //}
+
+
+// rewrite
+vector<string> letterCombinations(string digits) {
+  char* str[] = { "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+  vector<string> result (1, "");
+
+  for (int i = 0; i < digits.size(); ++ i) {
+    vector<string> next;
+    for (vector<string>::iterator it = result.begin(); it != result.end(); ++ it) {
+      if (digits[i] > '1' && digits[i] <= '9') {
+        int j = 0;
+        while (str[digits[i] - '2'][j]) {
+          next.push_back(*it + str[digits[i] - '2'][j]);
+          ++ j;
+        }
+      }
+      else
+        next.push_back(*it);
+    }
+    result.assign(next.begin(), next.end());
+  }
+  return result;
+}

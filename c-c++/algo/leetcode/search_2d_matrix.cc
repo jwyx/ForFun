@@ -36,6 +36,7 @@ bool searchMatrix(vector<vector<int> > &matrix, int target) {
   }
   return false;
 }
+// O(log n + log m)
 
 // TODO: add more methods
 // Credit:

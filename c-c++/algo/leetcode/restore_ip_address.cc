@@ -6,7 +6,7 @@
 #include <algorithm>
 using namespace std;
 
-
+// set is really need?
 void get_ip(const string &s, vector<string> &parts, set<string> &resultUniq) {
   if (s.size() > 3 * (4 - parts.size()) || s.size() < (4 - parts.size()) ||\
       !parts.empty() && atoi(parts.back().c_str()) > 255)

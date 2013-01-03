@@ -7,8 +7,6 @@
  * };
  */
 void connect(TreeLinkNode *root) {
-  if (!root || !root->left || !root->right)
-    return;
   TreeLinkNode *left = root;
   // left, keep the left node for each level
   while (left && left->left && left->right) {

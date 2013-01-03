@@ -7,6 +7,10 @@ int searchInsert(int A[], int n, int target) {
     return 0;
   int left = 0, right = n-1, mid = 0;
   while(left <= right) {
+    // finally, left + 1 = right
+    // mid = left, and have two situations:
+    //  target < A[mid], then right = left-1
+    //  target > A[mid], then left = right
     mid = left + (right-left)/2;
     if(target == A[mid])
       return mid;

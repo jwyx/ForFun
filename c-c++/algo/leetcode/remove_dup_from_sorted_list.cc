@@ -22,8 +22,8 @@ ListNode *deleteDuplicates(ListNode *head) {
 }
 
 ListNode *deleteDuplicates(ListNode *head) {
-  if (!head)
-    return NULL;
+  // if (!head)
+  //  return NULL;
   ListNode** curr = &head;
   while (*curr) {
     if ((*curr)->next && (*curr)->val == (*curr)->next->val)

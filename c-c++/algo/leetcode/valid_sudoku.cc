@@ -1,7 +1,9 @@
+// not very efficient; better method should check each block once
 bool isValidSudoku(vector<vector<char> > &board) {
+  assert(board.size() == board[0].size());
   for (int i = 0; i < board.size(); i ++) {
     for (int j = 0; j < board[i].size(); j ++) {
-      if ('.' == board[i][j]) {
+      if ('.' != board[i][j]) {
         if (!isValid(board, i, j))
           return false;
       }

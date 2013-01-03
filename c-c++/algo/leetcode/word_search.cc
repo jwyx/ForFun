@@ -16,9 +16,10 @@ bool exist(vector<vector<char> > &board, string word) {
 bool dfs(const string word, const int x, const int y, vector<vector<char> > &board, string &temp) {
   if (word == temp)
     return true;
+  // out of boundary or reach again
   if (x < 0 || x >= board.size() || y < 0 || y >= board[x].size() || !board[x][y])
     return false;
-  // IMPORTANT!
+  // IMPORTANT! temp word size > word or the last letters are different
   if (word.size() <= temp.size() || word[temp.size()] != board[x][y])
     return false;
 
