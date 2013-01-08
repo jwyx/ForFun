@@ -21,6 +21,7 @@ class ShapeFactory {
 };
 
 Shape *ShapeFactory::Create(const string &type) {
+  // 所有在用简单工厂的地方，都可以考虑用反射技术来去除switch或if, 减除分支判断带来的耦合.
   if ("circle" == type)
     return new Circle();
   if ("rectangle" == type)
