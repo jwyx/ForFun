@@ -1,0 +1,183 @@
+/* SELECT */
+/* all user whose birth_date is larger than x */;
+
+SELECT *
+  FROM users
+  WHERE birth_date > '1973-1-1';
+
+/* NOT NULL */;
+SELECT first_name, last_name
+  FROM users
+  WHERE birth_date is NOT NULL;
+
+/* ORDER BY ASC(default)/DESC*/;
+SELECT first_name, last_name
+  FROM users
+  ORDER BY last_name DESC;
+
+/* LIKE %(multiple wildcards)/_(single wildcard) */
+SELECT first_name, last_name
+  FROM users
+  WHERE last_name LIKE 'T%';
+
+SELECT first_name, last_name
+  FROM users
+  WHERE last_name LIKE 'T%lo_';
+
+/* 
+  SQL Logical Operations (operates from Left to Right)
+  1. NOT or !
+  2. AND or &&
+  3. OR or ||
+  4. =
+  5. <> or !=
+  6. <=
+  7. >=
+  8. <
+  9. >
+ */;
+
+SELECT *
+  FROM users
+  WHERE last_name <> 'Diaz';
+
+/* IN */;
+SELECT *
+  FROM users
+  WHERE last_name IN ('Diaz', 'CArrera');
+
+/* Aggregation */;
+SELECT count(*) AS count
+  FROM users;
+
+SELECT sum(id)
+  FROM users;
+
+SELECT max(id)
+  FROM users;
+
+/* HAVING */
+SELECT first_name, last_name, email
+  FROM users, emails
+  WHERE users.id = emails.user_id;
+
+SELECT DISTINCT first_name, last_name, email, phone
+  FROM users, emails, telephones
+  WHERE users.id = emails.user_id AND users.id = telephones.user_id;
+
+/* JOIN */;
+SELECT *
+  FROM telephones JOIN emails
+  ON telephones.user_id = emails.user_id;
+
+SELECT *
+  FROM telephones LEFT JOIN emails
+  ON telephones.user_id = emails.user_id;
+
+SELECT *
+  FROM telephones RIGHT JOIN emails
+  ON telephones.user_id = emails.user_id;
+
+SELECT *
+  FROM telephones JOIN emails
+  USING (user_id);
+
+SELECT *
+  FROM telephones LEFT JOIN emails
+  USING (user_id);
+
+SELECT *
+  FROM telephones RIGHT JOIN emails
+  USING (user_id);
+
+SELECT *
+  FROM telephones INNER JOIN emails
+  ON telephones.user_id = emails.user_id;
+
+/* BETWEEN */;
+SELECT *
+  FROM users
+  WHERE id BETWEEN 1 AND 2;
+
+/* ALERT */
+/* ALERT: add column to table or change it */
+ALTER TABLE users ADD age SMALLINT;
+
+ALTER TABLE users CHANGE COLUMN age age TINYINT;
+
+/* MODIFY: change column type */;
+ALTER TABLE users MODIFY COLUMN age TINYINT;
+
+/* RENAME: change table name */;
+ALTER TABLE users RENAME AS persons;
+
+/* UPDATE */
+/* UPDATE: add a value to a field in a table */
+UPDATE users SET age = '23' WHERE id = 1;
+
+/* DELETE */
+DELETE FROM users;
+
+/* DROP */
+DROP TABLE users;
+DROP TABLE addresses, telephones;
+
+/* FULLTEXT SEARCH */
+
+/* OPTIMIZING */
+-- INDEX, B-Tree, Hashing, Sorted
+
+/* Replication */
+-- Replication is the term given to the process where databases synchronize with each other.
+
+/* Transactions */
+-- In an RDBMS, when several people access the same data or if a server dies in the middle of an update,
+-- there has to be a mechanism to protect the integrity of the data.
+-- A transaction groups a set of database actions into a single instantaneous event.
+-- This event can either succeed or fail. i.e .either get the job done or fail.
+
+/* A C I D */
+-- Atomicity:   If an action consists of multiple steps - it's still considered as one operation.
+-- Consistency: The database exists in a valid and accurate operating state before and after a transaction.
+-- Isolation:   Processes within one transaction are independent and cannot interfere with that in others.
+-- Durability:  Changes affected by a transaction are permanent
+
+-- Logging
+-- Protected from writing simutanously
+--    Timestamp
+--    Locking or Two Parse Locking
+--  How to handle deadlock ?
+
+/* VIEWS */
+-- The view definition is “frozen” at creation time, so changes to the underlying tables afterward do not affect the view definition.
+CREATE VIEW top_users AS
+  SELECT *
+  FROM users
+  WHERE id < 3;
+
+/* TRIGGER */
+delimiter |
+CREATE TRIGGER usersref AFTER INSERT ON users
+  FOR EACH ROW BEGIN
+    INSERT INTO emails (user_id) VALUES (NEW.id);
+    INSERT INTO telephones (user_id) VALUES (NEW.id);
+  END|
+delimiter ;
+
+/* PROCEDURE */
+delimiter //
+CREATE PROCEDURE simpleproc (OUT param1 INT)
+  BEGIN
+    SELECT COUNT(*) INTO param1 FROM users;
+  END//
+delimiter ;
+
+CALL simpleproc(@a);
+
+SELECT @a;
+
+/* FUNCTION */
+CREATE FUNCTION hello (s CHAR(20))
+RETURNS CHAR(50) DETERMINISTIC
+RETURN CONCAT('Hello, ', s, '!');
+

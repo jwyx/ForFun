@@ -1,0 +1,208 @@
+# PYTHON 自然语言处理
+
+id(): 获取对象的数字标识符
+
+赋值: b = [], a = b
+复制: b = [], a = b[:]
+
+等式:
+
+  a == b : 值比较
+  a is b : 值比较, 而且同一个对象
+
+[], '' : False
+
+all(), any():
+
+  可以应用到一个链表（或其他序列），来检查是否全部或任一项目满足一些条件
+  all(len(w) > 4 for w in sent)
+  any(len(w) > 4 for w in sent)
+
+tuple:
+
+  元组使用逗号操作符, 但空元组用()构造
+  列表是可变的，而元组是不可变的
+
+序列上的操作:
+
+  for item in s         遍历s 中的元素
+  for item in sorted(s) 按顺序遍历s 中的元素
+  for item in set(s)    遍历s 中的无重复的元素
+  for item in reversed(s)           按逆序遍历s 中的元素
+  for item in set(s).difference(t)  遍历在集合s 中不在集合t 的元素
+  for item in random.shuffle(s)     按随机顺序遍历s 中的元素
+
+words[2], words[3], words[4] = words[3], words[4], words[2]
+一种地道和可读的移动链表内的项目的方式
+
+下划线只是一个普通的Python变量，我们约定可以用下划线表示我们不会使用其值的变量
+
+>>> max([w.lower() for w in nltk.word_tokenize(text)])  ~1
+'word'
+>>> max(w.lower() for w in nltk.word_tokenize(text))    ~2
+'word'
+~2使用了产生器表达式。这不仅仅是标记（形式上看起来）方便：在许多语言处理
+的案例中，产生器表达式会更高效。在~1中，链表对象的存储空间必须在max()的值被计
+算之前分配。如果文本非常大的，这将会很慢。在~2中，数据流向调用它的函数。由于调用
+的函数只是简单的要找最大值——按字典顺序排在最后的词——它可以处理数据流，而无需
+存储迄今为止的最大值以外的任何值。
+
+=============== 风格 ===================
+
+代码布局中每个缩进级别应使用4 个空格你应该确保当你在一个文件中写Python 代
+码时，避免使用tab 缩进，因为它可能由于不同的文本编辑器的不同解释而产生混乱。
+
+每行应少于80 个字符长，如果必要的话，你可以在圆括号、方括号或花括号内换行，
+因为Python 能够探测到该行与下一行是连续的。或者用\
+
+计数器的使用:
+
+ngram:      [sent[i:i+n] for i in range(len(sent)-n+1)]
+m, n维数组: array = [[set() for i in range(n)] for j in range(m)]
+注意: 不能用array = [[set()] * n] * m 生成
+
+
+import re
+  def get_text(file):
+  """Read text from a file, normalizing whitespace and stripping HTML markup."""
+  text = open(file).read()
+  text = re.sub('\s+', ' ', text)
+  text = re.sub(r'<.*?>', ' ', text)
+  return text
+
+函数定义内的第一个字符串被称为 docstring。描述函数目的，而非实现。
+它不仅为阅读代码的人记录函数的功能，也使从文件加载这段代码的程序员更容易访问
+
+>>> help(get_text)
+Help on function get_text:
+get_text(file)
+  Read text from a file, normalizing whitespace
+  and stripping HTML markup.
+
+名称解析的LGB规则: 本地local, 全局global, 然后内置built-in
+
+程序中添加assert()能帮助你找到逻辑错误，是一种防御性编程。
+
+函数作为参数: lambda 或者 函数名
+
+产生器:
+
+def search1(substring, words):
+  result = []
+  for word in words:
+    if substring in word:
+      result.append(word)
+  return result
+
+# 产生器版本
+def search2(substring, words):
+  for word in words:
+    if substring in word:
+      yield word
+
+第一次调用此函数，它运行到yield 语句然后停下来。
+调用程序获得第一个词，没有任何必要的处理。一旦调用程序对另一个词做好准备，函数会
+从停下来的地方继续执行，直到再次遇到yield 语句。这种方法通常更有效，因为函数只产
+生调用程序需要的数据，并不需要分配额外的内存来存储输出
+
+高阶函数:
+  提供函数式编程语言特性
+  map()
+
+链表推导为基础的解决方案通常比基于高阶函数的解决方案可读性更好
+
+参数的命名:
+
+当有很多参数时，很容易混淆正确的顺序。我们可以通过名字引用参数，甚至可以给
+它们分配默认值以供调用程序没有提供该参数时使用。现在参数可以按任意顺序指定，
+也可以省略。这些被称为关键字参数。如果我们混合使用这两种参数，
+就必须确保未命名的参数在命名的参数前面。必须是这样，因为未命名参数是根据位置来定义的。
+我们可以定义一个函数，接受任意数量的未命名和命名参数，并通过一个就地的参数链表*args
+和一个就地的关键字参数字典**kwargs 来访问它们。
+def generic(*args, **kwargs):
+  print args
+  print kwargs
+
+注意不要使用可变对象作为参数的默认值。
+
+__file__定位你的系统中任一NLTK 模块的代码：
+>>> nltk.metrics.distance.__file__
+'/usr/lib/python2.5/site-packages/nltk/metrics/distance.pyc'
+>>> help(nltk.metrics.distance)
+
+你可以选择性的列出一个模块的外部可访问的名称，使用像这样的一个特殊的内置变量
+__all__ = ['edit_distance', 'jaccard_distance']
+
+
+# 调试器
+>>> import pdb
+>>> import mymodule
+>>> pdb.run('mymodule.myfunction()')
+
+# 回归测试
+doctest
+
+# 字母查找树
+def insert(trie, key, value):
+  if key:
+    first, rest = key[0], key[1:]
+    if first not in trie:
+      trie[first] = {}
+      insert(trie[first], rest, value)
+  else:
+    trie['value'] = value
+
+>>> trie = nltk.defaultdict(dict)
+>>> insert(trie, 'chat', 'cat')
+>>> insert(trie, 'chien', 'dog')
+>>> insert(trie, 'chair', 'flesh')
+>>> insert(trie, 'chic', 'stylish')
+>>> trie = dict(trie) # for nicer printing
+>>> trie['c']['h']['a']['t']['value']
+'cat'
+>>> pprint.pprint(trie)
+{'c': {'h': {'a': {'t': {'value': 'cat'}},
+      {'i': {'r': {'value': 'flesh'}}},
+       'i': {'e': {'n': {'value': 'dog'}}}
+      {'c': {'value': 'stylish'}}}}}
+
+# 测试执行时间
+timeit
+
+1. 递归 2. 从下到上DP 3.从上到下DP 4.PYTHON内置实现memoize
+def virahanka1(n):
+  if n == 0:
+    return [""]
+  elif n == 1:
+    return ["S"]
+  else:
+    s = ["S" + prosody for prosody in virahanka1(n-1)]
+    l = ["L" + prosody for prosody in virahanka1(n-2)]
+  return s + l
+
+def virahanka2(n):
+  lookup = [[""], ["S"]]
+  for i in range(n-1):
+    s = ["S" + prosody for prosody in lookup[i+1]]
+    l = ["L" + prosody for prosody in lookup[i]]
+  lookup.append(s + l)
+  return lookup[n]
+
+def virahanka3(n, lookup={0:[""], 1:["S"]}):
+  if n not in lookup:
+    s = ["S" + prosody for prosody in virahanka3(n-1)]
+    l = ["L" + prosody for prosody in virahanka3(n-2)]
+    lookup[n] = s + l
+  return lookup[n]
+
+import memoize
+@memoize
+def virahanka4(n):
+  if n == 0:
+    return [""]
+  elif n == 1:
+    return ["S"]
+  else:
+    s = ["S" + prosody for prosody in virahanka4(n-1)]
+    l = ["L" + prosody for prosody in virahanka4(n-2)]
+  return s + l

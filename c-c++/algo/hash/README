@@ -6,3 +6,9 @@
 
 // prime:3001,5003,10007,20011,50021,100003,150001,200003,500009,704447,901963,1009237,1199993,1500007,2000003,5000011
 
+// open hashing, 链表法
+// closed hashing/ opened addressing, 开地址法
+
+// credit: http://blog.csdn.net/v_july_v/article/details/6256463
+// TODO: 暴雪的hash方法
+// d-left hashing

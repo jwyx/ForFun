@@ -1,0 +1,37 @@
+INSERT INTO users (first_name, last_name, birth_date) VALUES
+  ('Yamila','Diaz ','1974-10-13'),
+  ('Nikki','Taylor','1972-03-04'),
+  ('Tia','Carrera','1975-09-18');
+
+INSERT INTO addresses (street, city, state, zip, country) VALUES
+  ('300 Yamila Ave.', 'Los Angeles', 'CA', '300012', 'USA'),
+  ('4000 Nikki St.', 'Boca Raton','FL', '500034', 'USA'),
+  ('404 Tia Blvd.', 'New York','NY', '10011', 'USA');
+
+INSERT INTO user_address (user_id, address_id) VALUES
+  (1, 1),
+  (2, 2),
+  (3, 3);
+
+INSERT INTO companies (name, designation) VALUES
+  ('Xerox', 'New Business Manager'),
+  ('Cabletron', 'Customer Support Eng'),
+  ('Apple', 'Sales Manager');
+
+INSERT INTO user_company (user_id, company_id) VALUES
+  (1, 1),
+  (2, 2),
+  (3, 3);
+
+INSERT INTO emails (user_id, email) VALUES
+  (1, 'yamila@yamila.com'),
+  (2, 'nikki@nikki.com'),
+  (3, 'tia@tia.com');
+
+INSERT INTO telephones (user_id, phone, type) VALUES
+  (1, '333-50000', 'work'),
+  (1, '333-60000', 'home'),
+  (2, '444-70000', 'work'),
+  (2, '444-80000', 'home'),
+  (3, '555-30000', 'work'),
+  (3, '555-40000', 'home');

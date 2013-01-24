@@ -1,0 +1,59 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS addresses;
+DROP TABLE IF EXISTS user_address;
+DROP TABLE IF EXISTS telephones;
+DROP TABLE IF EXISTS emails;
+DROP TABLE IF EXISTS companies;
+DROP TABLE IF EXISTS user_company;
+
+CREATE TABLE users (
+  id INT NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(20),
+  last_name VARCHAR(20),
+  birth_date DATE DEFAULT '1900-1-1',
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE addresses (
+  id INT NOT NULL AUTO_INCREMENT,
+  street VARCHAR(50),
+  city VARCHAR(20),
+  state VARCHAR(20),
+  zip VARCHAR(15),
+  country VARCHAR(20),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE user_address (
+  user_id INT NOT NULL REFERENCES users(id),
+  address_id INT NOT NULL REFERENCES addresses(id),
+  PRIMARY KEY (user_id, address_id)
+);
+
+CREATE TABLE telephones (
+  id INT NOT NULL AUTO_INCREMENT,
+  phone VARCHAR(20) NOT NULL,
+  type ENUM('work', 'home') NOT NULL DEFAULT 'home',
+  user_id INT NOT NULL REFERENCES users(id),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE emails (
+  id INT NOT NULL AUTO_INCREMENT,
+  email VARCHAR(20),
+  user_id INT NOT NULL REFERENCES users(id),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE companies (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(25),
+  designation VARCHAR(25),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE user_company (
+  user_id INT NOT NULL REFERENCES users(id),
+  company_id INT NOT NULL REFERENCES companies(id),
+  PRIMARY KEY (user_id, company_id)
+);
