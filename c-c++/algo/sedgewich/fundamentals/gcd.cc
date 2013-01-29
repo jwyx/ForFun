@@ -22,6 +22,16 @@
 #include <set>
 using namespace std;
 
+
+int gcd_recur(int u, int v)
+{
+  if (v == 0) return u;
+  if (u < v)
+    swap(u, v);
+  u %= v;
+  return gcd_recur(v, u);
+}
+
 int gcd(int u, int v)
 {
   // If negative
@@ -117,7 +127,7 @@ int main (int argc, char *argv[])
 {
   int u, v, w;
   cin >> u >> v >> w;
-  cout << u << " " << v << " " << gcd(u, v) << endl;
+  cout << u << " " << v << " " << gcd_recur(u, v) << endl;
 
   // 扩展1
 //  fraction f;
@@ -138,13 +148,13 @@ int main (int argc, char *argv[])
 //    cout << x << " ";
 //  cout << endl;
 
-  fraction f;
-  f.numerator = u;
-  f.denominator = v;
-  vector<fraction> fractions = all_fractions(f);
-  for (auto &x : fractions)
-    cout << x.numerator << " " << x.denominator << " ";
-  cout << endl;
+//  fraction f;
+//  f.numerator = u;
+//  f.denominator = v;
+//  vector<fraction> fractions = all_fractions(f);
+//  for (auto &x : fractions)
+//    cout << x.numerator << " " << x.denominator << " ";
+//  cout << endl;
 
   // 扩展3
 //  cout << u << " " << v << " " << w << " " << gcd_three(u, v, w) << endl;
