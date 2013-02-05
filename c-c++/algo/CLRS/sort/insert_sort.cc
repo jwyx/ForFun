@@ -4,15 +4,14 @@ using namespace std;
 
 // O(n^2)
 template<typename T>
-void InsertSort(vector<T> &v) {
-  T tmp;
-  size_t j;
-  for (size_t i = 1; i < v.size(); i ++) {
+void insert_sort(vector<T> &v) {
+  T temp;
+  for (size_t i = 1, j = i; i < v.size(); i ++) {
     if (v[i] < v[i-1]) {
-      tmp = v[i];
-      for (j = i - 1; v[j] > tmp; j--)
-        v[j+1] = v[j];
-      v[j+1] = tmp;
+      temp = v[i];
+      for (j = i; j > 0 && v[j-1] > temp; j--)
+        v[j] = v[j-1];
+      v[j] = temp;
     }
   }
 }
@@ -21,7 +20,7 @@ template<typename T>
 void BInsertSort(vector<T> &v) {
   T tmp;
   for (int i = 1; i < v.size(); i ++) {
-    if (v[i] < v[i - 1]) { // it's ncessary
+    if (v[i] < v[i - 1]) { // it's necessary
       tmp = v[i];
       int low = 0, high = i;
       // find the point that high + 1 is the first element larger than tmp
@@ -70,9 +69,9 @@ void BInsertSortRecu(vector<T> &v, int n) {
 int main(int argc, char *argv[]) {
   int a[] = { 1, 4, 1, 3, 2 };
   vector<int> v(a, a+sizeof(a)/sizeof(int));
-  // InsertSort(v);
+  insert_sort(v);
   // BInsertSort(v);
-  BInsertSortRecu(v, v.size() - 1);
+  // BInsertSortRecu(v, v.size() - 1);
   for (auto &val : v)
     cout << val << endl;
 }
