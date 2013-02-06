@@ -41,7 +41,12 @@ int main(int argc, char *argv[])
     int prev = 0, curr = 1;
 
     // 初始化，标记无效数据
-    memset(chart[prev], -1, sizeof(chart[prev]));
+    for (int i = 0; i < MAX_CASE; i++) {
+      for (int j = 0; j < MAX_CASE; j++) {
+        chart[prev][i][j] = -1;
+      }
+    }
+
     chart[prev][0][0] = 0;
 
     for (int i = 0; i < 3; i++)
@@ -58,7 +63,11 @@ int main(int argc, char *argv[])
       // 读入第n车的容量参数
       cin >> weight >> size;
 
-      memset(chart[curr], -1, sizeof(chart[curr]));
+      for (int i = 0; i < MAX_CASE; i++) {
+        for (int j = 0; j < MAX_CASE; j++) {
+          chart[curr][i][j] = -1;
+        }
+      }
 
       // 第n车能装最多的helm数
       ni = min(weight/w[0], size/s[0]);
